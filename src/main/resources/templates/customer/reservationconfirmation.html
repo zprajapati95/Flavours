@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reservation Confirmation</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Reservation Confirmed</h1>
+    </header>
+
+    <h2>Your reservation details:</h2>
+    <p>Date: <span th:text="${date}"></span></p>
+    <p>Time: <span th:text="${time}"></span></p>
+    <p>Number of Guests: <span th:text="${guests}"></span></p>
+    <p>Phone Number: <span th:text="${phone}"></span></p>
+
+     <th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>

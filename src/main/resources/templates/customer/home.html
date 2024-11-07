@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/style.css}"> <!-- External CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+</head>
+<body>
+
+    <!-- Include Header Fragment -->
+    <th:block th:insert="fragments/header :: header"></th:block>
+
+    <section class="center-image-container">
+        <img th:src="'https://imagedelivery.net/aPDHOWLzkdlEAMvg3YLQug/production-7psf7t5a5vb0t2sckmamoujxn2p4/fit=contain,width=1920'" 
+             class="center-image center-image-hover" style="width:100%; display:block;">
+    </section>
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Photo Gallery</h2>
+
+        <div class="row">
+            <!-- Gallery Item 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="https://c.ndtvimg.com/2021-04/umk8i7ko_pasta_625x300_01_April_21.jpg" 
+                         class="card-img-top" alt="Pasta Dish">
+                </div>
+            </div>
+
+            <!-- Gallery Item 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="https://img.freepik.com/premium-photo/beautiful-glass-red-wine-modern-restaurant_499228-988.jpg" 
+                         class="card-img-top" alt="Glass of Wine">
+                </div>
+            </div>
+
+            <!-- Gallery Item 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="https://smithrestaurant.ca/wp-content/uploads/2023/11/IMG_7765crop-scaled.jpg" 
+                         class="card-img-top" alt="Restaurant Interior">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Footer Fragment -->
+    <th:block th:replace="fragments/footer :: footer"></th:block>
+
+</body>
+</html>

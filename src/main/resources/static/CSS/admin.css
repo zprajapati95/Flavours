@@ -1,0 +1,173 @@
+/* admin.css */
+
+/* Global Styles */
+h1 {
+    color: black; /* Ensure header text is black */
+    margin: 10px 10px 10px 25px;
+}
+
+/* Form Container Styling */
+.form-container {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dish-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 150px;
+}
+
+.input-group label {
+    font-size: 14px;
+    color: #333; /* Ensure label text is dark */
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: black; /* Ensure text inside inputs is black */
+    background-color: white; /* Set background of inputs */
+}
+
+/* Button Group and Buttons */
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex: 1;
+    min-width: 150px;
+}
+
+.add-btn, .edit-btn, .delete-btn {
+    background-color: #000;
+    color: #fff; /* Button text remains white */
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.add-btn:hover, .edit-btn:hover, .delete-btn:hover {
+    background-color: #333;
+}
+
+.edit-btn::before {
+    content: "\270E"; /* Pencil emoji */
+    margin-right: 5px;
+}
+
+.delete-btn::before {
+    content: "\1F5D1"; /* Trash bin emoji */
+    margin-right: 5px;
+}
+
+/* Dish List Container */
+.dish-list-container {
+    max-width: 1450px;
+    margin: 25px auto;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dish-list-container h2 {
+    color: black; /* Ensure section header text is black */
+}
+
+/* Individual Dish Card */
+.dish-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    color: black; /* Ensure text inside dish cards is black */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.dish-item:hover {
+    transform: scale(1.02); /* Slight zoom on hover */
+}
+
+.dish-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.dish-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.dish-details h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #333; /* Ensure dish name text is dark */
+}
+
+.dish-details p {
+    margin: 4px 0;
+    color: #666; /* Light gray for additional details */
+}
+
+.dish-details span {
+    font-weight: bold;
+    color: #000; /* Ensure price text is black */
+}
+.dish-item-row {
+    display: flex;
+    align-items: center;
+    gap:65px;
+    flex-wrap: wrap;
+}
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .dish-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dish-image {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+	

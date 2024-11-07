@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/style.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Include Header Fragment -->
+    <th:block th:replace="fragments/header :: header"></th:block>
+    
+    <div class="container">
+        <section class="my-5">
+            <h2 style="color: black; text-align: center;">Contact Us</h2>
+            <p style="color: black; text-align: center;">130 King St West Toronto, ON, M5X 2A2</p>
+            <p style="color: black; text-align: center;">999-9999-000</p>
+            <p style="color: black; text-align: center;">info@flavor.com</p>
+            
+            <h2 style="color: black; text-align: center; margin-top: 40px;">Happy Hours</h2><br>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <h3>Monday - Friday</h3>
+                    <p style="color: black;">11:30 am – 12:00 am</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h3>Weekends</h3>
+                    <p style="color: black;">10:00 am - 1:00 am</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h3>Special Events</h3>
+                    <p style="color: black;">3:00 pm – 2:00 am</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Include Footer Fragment -->
+    <th:block th:replace="fragments/footer :: footer" ></th:block>
+</body>
+</html>

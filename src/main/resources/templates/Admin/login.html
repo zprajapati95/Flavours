@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login</title>
+<style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Reset default image spacing */
+        img {
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+        }
+
+        /* Logo Styling */
+        .login-logo {
+            width: 160px;
+            height: 160px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* Login Container */
+        .login-container {
+            max-width: 400px;
+            width: 100%;
+            height:100%;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Header Styling */
+        .login-container h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styling */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: black;
+            background-color: white;
+        }
+
+        /* Error and Success Messages */
+        .message {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .success-message {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        /* Button Styling */
+        button[type="submit"] {
+            width: 96%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo Image Positioned Above Login Container -->
+    <img th:src="@{/menu-images/logo.png}"  class="login-logo">
+
+    <div class="login-container">
+        <h2>Admin Login</h2>
+
+        <!-- Display error message if present -->
+        <div th:if="${param.error}" class="message error-message">
+            Invalid username or password.</div>
+
+        <!-- Display logout success message if present -->
+        <div th:if="${param.logout}" class="message success-message">
+            You have been logged out successfully.</div>
+
+        <form method="post" action="/admin/login">
+            <label for="username">Username:</label> 
+            <input type="text" id="username" name="username" required> 
+            <label for="password">Password:</label> 
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+      <p style="color: black; text-align: center;">130 King St West Toronto, ON, M5X 2A2</p>
+    <th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>

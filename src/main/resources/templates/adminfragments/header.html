@@ -1,0 +1,30 @@
+<!-- Thymeleaf fragment for header -->
+   <head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- Link to external CSS -->
+</head>
+    <header>
+         <div class="logo" style="width:10px;height:20px; margin-left:20px;">
+       <img th:src="@{/menu-images/logo.png}" th:alt="${logo}">
+        </div>
+         <nav>
+        <ul>
+            <li><a th:href="@{/}" style="color: black;">Home</a></li>  <!-- Link to Home -->
+            
+           <!-- Link to Menu -->
+            <li><a th:href="@{/adminreservations}" style="color: black;">Reservations</a></li>  <!-- Link to About Us -->
+             <li><a th:href="@{/logout}" style="color: black;" >Logout</a></li>
+           <li class="icon-container">
+                    <a href="https://www.facebook.com" target="_blank">
+                        <img src="/menu-images/facebook.png" alt="Facebook" width="40" height="40" >
+                    </a>
+                </li>
+                <li class="icon-container">
+                    <a href="https://www.instagram.com" target="_blank">
+                        <img src="/menu-images/instagram.png" alt="Instagram" width="40" height="30">
+                    </a>
+                </li> <!-- Link to Contact -->
+        </ul>
+    </nav>
+    </header>

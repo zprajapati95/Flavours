@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">   
+    
+</head>
+
+<header>
+ <link rel="stylesheet" type="text/css" th:href="@{/CSS/style.css}">
+ <div class="logo" style="width:5px;height:20px; margin-left:20px;">
+ 
+       <img th:src="@{/menu-images/logo.png}" th:alt="${logo}">
+        </div>
+<nav>
+        <ul>
+            <li><a th:href="@{/}" style="color: black;">Home</a></li>  <!-- Link to Home -->
+            <li><a th:href="@{/menu}" style="color: black;">Menu</a></li> 
+            
+           <!-- Link to Menu -->
+            <li><a th:href="@{/reservations}" style="color: black;">Reservations</a></li>  <!-- Link to About Us -->
+            <li><a th:href="@{/contact}" style="color: black;">Contact</a></li>
+           <li class="icon-container">
+                    <a href="https://www.facebook.com" target="_blank">
+                        <img src="/menu-images/facebook.png" alt="Facebook" width="40" height="40" >
+                    </a>
+                </li>
+                <li class="icon-container">
+                    <a href="https://www.instagram.com" target="_blank">
+                        <img src="/menu-images/instagram.png" alt="Instagram" width="40" height="30">
+                    </a>
+                </li> <!-- Link to Contact -->
+        </ul>
+    </nav>
+</header>
+
+<body>
+ <link rel="stylesheet" type="text/css" th:href="@{/CSS/menustyle.css}">
+ 
+    <!-- Content -->
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Sidebar Categories -->
+            <div class="col-md-2">
+                <div class="menu-sidebar">
+                    <h5 style="color: black;">Categories</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="#dinner-menu">Dinner Menu</a></li>
+                        <li class="list-group-item"><a href="#lunch">Lunch</a></li>
+                        <li class="list-group-item"><a href="#wine-list">Wine List</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Menu Items -->
+            <div class="col-md-8">
+                <div id="dinner-menu">
+                    <h4 style="color: black;">Dinner Menu</h4>
+                    
+                    <div class="row">
+                    <div class="col-md-6 mb-7">
+                        <div class="card menu-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="https://www.cucinabyelena.com/wp-content/uploads/2024/01/Best-Sicilian-Arancini-Recipe-24.jpg" alt="Provolone & Pear Arancini" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Provolone & Pear Arancini</h5>
+                                        <p class="card-text">Burnt honey, rosemary, sea salt</p>
+                                        <p class="price">$ 20</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4" th:each="dish : ${dishes}">
+                        <div class="card menu-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="@{${dish.imagePath}}" th:alt="${dish.name}" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title"  th:text="${dish.name}"></h5>
+                                        <p class="card-text"  th:text="${dish.description}"></p>
+                                        <p class="price" th:text="${dish.price}"></p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-6 mb-4" th:each="dish : ${dishes}">
+                        <div class="card menu-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="@{${dish.imagePath}}" th:alt="${dish.name}" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title"  th:text="${dish.name}"></h5>
+                                        <p class="card-text"  th:text="${dish.description}"></p>
+                                        <p class="price" th:text="${dish.price}"></p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    
+                   
+                    
+                    <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card menu-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="https://www.seriouseats.com/thmb/YsGSBzHBXtdVRcUKI_iiyPKLKGI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__2021__03__20210301-Spaghetti-Allo-Scoglio-Tim-Chin-20-639123ce316c4dbc8c3f30984295d5fa.jpg" alt="Provolone & Pear Arancini" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Spaghetti allo scoglio</h5>
+                                        <p class="card-text">clams, PEI mussels pangattato , white wine,lemon chili</p>
+                                        <p class="price">$ 30</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="col-md-6 mb-4">
+                        <div class="card menu-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="https://img.pikbest.com/ai/illus_our/20230412/23201d25f66a92a5a46dca0aec5003c4.png!bwr800" alt="Provolone & Pear Arancini" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Spaghetti al pesto</h5>
+                                        <p class="card-text">Tuscan basil and walnut pesto,pecorino confit garlic</p>
+                                        <p class="price">$ 30</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                
+                    
+                   <div id="lunch">
+                    <h4 style="color: black;">Lunch</h4>
+                  <div class="row">
+                     <div class="col-md-6">
+                        <div class="card menu-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="https://zenaskitchen.com/wp-content/uploads/2022/08/harissa-burrata-salad.jpg" alt="Provolone & Pear Arancini" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Burrata</h5>
+                                        <p class="card-text">chicken liver mousse,treviso jam,herbs</p>
+                                        <p class="price">$ 20</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card menu-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="https://www.marblu.it/wp-content/uploads/2021/06/grilled-squid1.jpg" alt="Pasta Alfredo" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Calamari Alla Griglia</h5>
+                                        <p class="card-text">Shrimp & chili oil , yogurt, crisp shallots</p>
+                                        <p class="price">$ 17</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  
+                  
+                  
+                  <div class="row">
+                     <div class="col-md-6">
+                        <div class="card menu-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="https://flouredframe.com/wp-content/uploads/2020/09/vegan-gnocchi-al-pomodoro-ft-image-1200x1200-1.jpg" alt="Provolone & Pear Arancini" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Gnocchi Pomodoro</h5>
+                                        <p class="card-text">chicken liver mousse,treviso jam,herbs</p>
+                                        <p class="price">$ 20</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card menu-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="https://cdn.mos.cms.futurecdn.net/JCk56oHUFrtyfbBH79A3JR-1200-80.jpg" alt="Pasta Alfredo" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Penne All'Arrabbiata</h5>
+                                        <p class="card-text">Shrimp & chili oil , yogurt, crisp shallots</p>
+                                        <p class="price">$ 17</p>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                   
+                    <div id="wine-list">
+                    
+                    <h4 style="color: black;">Wine list</h4>
+                    <div class="row">
+                     <div class="col-md-6">
+                        <div class="card menu-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiM7EOFFU4vWZFQn1iRWw3e8IfkXnjfhLgMg&s" alt="Provolone & Pear Arancini" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">I MURI NEGROAMARO</h5>
+                                       
+                                        <p class="price">$ 20</p>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card menu-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="https://winecouture.it/wp-content/uploads/2024/07/Pinot-Grigio-Garda-Centofilari-_-Cesari.jpg" alt="Pasta Alfredo" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">CESARI PINOT GRIGIO</h5>
+                                        <p class="card-text">Shrimp & chili oil , yogurt, crisp shallots</p>
+                                        <p class="price">$ 17</p>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-6">
+                        <div class="card menu-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZiIsQaVeLNdut0IpNQpFlGOq7YizzkN1M3A&s" alt="Provolone & Pear Arancini" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">SOLID GROUND RIESLING</h5>
+                                       
+                                        <p class="price">$ 20</p>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card menu-card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="https://www.internationalwinechallenge.com/filestore/jpg/IWC2023/Issue106/Beck%20-%20Pinot%20Noir%20Rose.jpg" alt="Pasta Alfredo" class="card-img">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">HEADWIND PINOT NOIR</h5>
+                                        <p class="card-text">Shrimp & chili oil , yogurt, crisp shallots</p>
+                                        <p class="price">$ 17</p>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                    </div> <!-- Add more menu items as needed -->
+                </div>
+            </div>
+        </div>
+
+    <!-- Floating Cart Button -->
+<!-- Floating Cart Button -->
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     <th:block th:replace="fragments/footer :: footer" ></th:block>
+</body>
+</html>
