@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Dish {
@@ -11,12 +12,12 @@ public class Dish {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto incremented ID
     private Long id;
-
     private String name;
     private String category;
     private String description;
     private Double price;
-    private String imagePath;  // The image path will be stored here
+    @Transient
+    private String imagePath;// The image path will be stored here
 
     // Getters and setters
 
@@ -61,10 +62,10 @@ public class Dish {
     }
 
     public String getImagePath() {
-        return imagePath;  // Relative path to static folder
+        return imagePath;
     }
 
     public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;  // Set image path in the database
+        this.imagePath = imagePath;
     }
 }

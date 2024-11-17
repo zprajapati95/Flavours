@@ -11,28 +11,30 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(authorize -> 
+            .authorizeHttpRequests(authorize ->
                 authorize
-                    .requestMatchers("/admin/**").authenticated() // Protect admin pages
-                    .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Adjust paths for static resources
-                    .anyRequest().permitAll() // Allow access to other pages
+                    // Allow access to H2 Console without authentication
+                    .requestMatchers("/h2-console/**").permitAll()  // Allow H2 Console without login
+                    .requestMatchers("/admin/**").authenticated()  // Protect admin pages, requiring login
+                    .requestMatchers("/CSS/**", "/images/**").permitAll()  // Allow static resources (CSS, images)
+                    .anyRequest().permitAll()  // Allow other pages without login
             )
-            
-            .formLogin(form -> 
+            .formLogin(form ->
                 form
-                    .loginPage("/admin/login") // Custom admin login page
-                    .defaultSuccessUrl("/admin/adminhome", true) // Redirect to admin home after successful login
-                    .failureUrl("/admin/login?error=true") // Redirect to login page with error on failure
-                    .permitAll() // Allow everyone to see the login page
+                    .loginPage("/admin/login")  // Custom login page for admins
+                    .defaultSuccessUrl("/admin/adminhome", true)  // Redirect after successful login
+                    .failureUrl("/admin/login?error=true")  // Failure URL
+                    .permitAll()
             )
-            .logout(logout -> 
+            .logout(logout ->
                 logout
-                    .logoutUrl("/admin/logout") // Custom logout URL
-                    .logoutSuccessUrl("/admin/login?logout=true") // Redirect to login page after logout
-                    .permitAll() // Allow everyone to log out
-            )
-            .csrf().disable(); // Disable CSRF for simplicity (not recommended in production)
-
+                    .logoutUrl("/admin/logout")  // Custom logout URL
+                    .logoutSuccessUrl("/admin/login?logout=true")  // Redirect after logout
+                    .permitAll()
+            );
+            http
+            .csrf().disable() // Disable CSRF for simplicity (should be enabled in production)
+            .headers().frameOptions().sameOrigin();  // Allow frames to display the H2 Console
         return http.build();
     }
 }

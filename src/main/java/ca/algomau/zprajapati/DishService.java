@@ -9,19 +9,29 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Service
 public class DishService {
 	
-	private final List<Dish> dishes = new CopyOnWriteArrayList<>();
-
-
-    // Method to add a dish
-    public void addDish(Dish dish) {
-        dishes.add(dish);
-        System.out.println("Dish added: " + dish);
+    private final DishRepository dishRepository;
+	
+    public DishService(DishRepository dishRepository) {
+        this.dishRepository = dishRepository;
     }
-    
-    // Method to get all dishes
-    public List<Dish> getDishes() {
-    	System.out.println("Fetching dishes: " + dishes);
-        return new ArrayList<>(dishes); // Return a copy to avoid external modification
+
+    // Add dish to the database
+    public void addDishToDatabase(Dish dish) {
+        dishRepository.addDish(dish);
+        System.out.println("Dish added to database: " + dish);
     }
+
+ // Get all dishes from the database
+    public List<Dish> getDishesFromDatabase() {
+    	 List<Dish> dishes = dishRepository.getDishes();
+    	    System.out.println("Fetched dishes from database: " + dishes);  // Log the fetched dishes
+    	    return dishes;
+    }
+
+	public List<Dish> getDishes() {
+		// TODO Auto-generated method stub
+		return getDishesFromDatabase(); 
+	}
+ 
 }
 
