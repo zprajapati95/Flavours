@@ -1,6 +1,5 @@
 package ca.algomau.zprajapati;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CustomerController {
 
-	@Autowired
-    private DishService dishService;
-	
+    @Autowired
+    private DishRepository dishRepository;
+
     // Default route to home page
     @GetMapping("/")
     public String showHomePage() {
@@ -25,12 +24,11 @@ public class CustomerController {
     // Menu Page
     @GetMapping("/menu")
     public String showMenuPage(Model model) {
-    	 List<Dish> dishes = dishService.getDishes();
-    	    model.addAttribute("dishes", dishes);
+        List<Dish> dishes = dishRepository.getDishes(); // Fetch dishes directly from the repository
+        model.addAttribute("dishes", dishes);
         return "customer/menu"; // Return menu.html template
     }
 
-    
     // About Us Page
     @GetMapping("/about")
     public String showAboutPage() {

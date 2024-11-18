@@ -1,97 +1,109 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Home</title>
-<link rel="stylesheet" th:href="@{/CSS/style.css}">
-<link rel="stylesheet" th:href="@{/CSS/admin.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+    <link rel="stylesheet" th:href="@{/CSS/style.css}">
+    <link rel="stylesheet" th:href="@{/CSS/admin.css}">
 </head>
 <body>
-	<th:block th:insert="adminfragments/header :: header"></th:block>
+    <th:block th:insert="adminfragments/header :: header"></th:block>
 
-	<!-- Welcome Message -->
-	<div class="welcome-header">
-		<h1>
-			Welcome, <span th:text="${username}" style="color: black;"></span>
-		</h1>
-	</div>
+    <!-- Welcome Message -->
+    <div class="welcome-header">
+        <h1>Welcome, <span th:text="${username}" style="color: black;"></span></h1>
+    </div>
 
-	<!-- Dish Form -->
-	<div class="form-container">
-		<form id="dishForm" method="post" th:action="@{/addDish}" enctype="multipart/form-data">
-		 <input type="hidden" name="_csrf" value="${_csrf.token}" />
-			<div class="dish-row">
-				<div class="input-group">
-					<label for="dishName">Dish Name:</label> <input type="text"
-						id="dishName" name="name" required>
-				</div>
-				<div class="input-group">
-					<label for="category">Category:</label> <input type="text"
-						id="category" name="category" required>
-				</div>
+    <!-- Dish Form -->
+    <div class="form-container">
+        <form id="dishForm" method="post" enctype="multipart/form-data" th:action="@{/Admin/adminhome}" th:object="${dish}">
+            <div class="dish-row">
+                <div class="input-group">
+                    <label for="dishName">Dish Name:</label>
+                    <input type="text" id="dishName" name="name" th:field="*{name}" required>
+                </div>
+                <div class="input-group">
+                    <label for="category">Category:</label>
+                    <input type="text" id="category" name="category" th:field="*{category}" required>
+                </div>
+                <div class="input-group">
+                    <label for="image">Dish Image:</label>
+                    <input type="file" id="image" name="image" accept="image/*" th:field="*{imagePath}" required>
+                </div>
+                <div class="input-group">
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" name="price" step="0.01" th:field="*{price}" required>
+                </div>
+                <div class="input-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="2" th:field="*{description}" required></textarea>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="add-btn">Add Dish</button>
+                </div>
+            </div>
+        </form>
+        <p id="responseMessage" class="success-message" style="display: none;"></p>
+    </div>
 
-				<div class="input-group">
-					<label for="image">Dish Image:</label> <input type="file"
-						id="image" name="image" accept="image/*" required>
-				</div>
-				<div class="input-group">
-					<label for="price">Price:</label> <input type="number" id="price"
-						name="price" step="0.01" required>
-				</div>
-				<div class="input-group">
-					<label for="description">Description:</label>
-					<textarea id="description" name="description" rows="2" required></textarea>
-				</div>
-				<div class="button-group">
-					<button type="submit" class="add-btn">Add Dish</button>
-				</div>
-			</div>
-			<!-- Success and Error Messages -->
-			<p th:if="${message}" th:text="${message}" class="success-message"></p>
-			<p th:if="${error}" th:text="${error}" class="error-message"></p>
-		</form>
-	</div>
+    <!-- Dish List Display Section -->
+    <div class="dish-list-container">
+        <h2>Dish List</h2>
+        <div th:if="${dishes.empty}">
+            <p>No dishes available. Please add a dish using the form above.</p>
+        </div>
+        <div class="dish-items" th:if="${!dishes.empty}">
+            <div th:each="dish : ${dishes}" class="dish-item">
+                <div class="dish-details">
+                    <p>Dish Name: <span th:text="${dish.name}"></span></p>
+                    <p>Category: <span th:text="${dish.category}"></span></p>
+                    <p>Price: $<span th:text="${dish.price}"></span></p>
+                    <p>Description: <span th:text="${dish.description}"></span></p>
+                    <img th:src="@{${dish.imagePath}}" alt="Dish Image" class="dish-image">
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<!-- Dish List Display Section -->
-	<div class="dish-list-container">
-		<h2>Dish List</h2>
-		<div th:if="${dishes.empty}">
-			<p>No dishes available. Please add a dish using the form above.</p>
-		</div>
-		<div class="dish-items" th:if="${!dishes.empty}">
-			<div th:each="dish : ${dishes}" class="dish-item">
-				<div class="dish-details">
-					<div class="dish-item-row">
-						<p>
-							Dish Name: <span th:text="${dish.name}"></span>
-						</p>
-						<p>
-							Category: <span th:text="${dish.category}"></span>
-						</p>
-						<p>
-							Price: $<span th:text="${dish.price}"></span>
-						</p>
-						<p>
-							Description: <span th:text="${dish.description}"></span>
-						</p>
-						<img th:src="@{${dish.imagePath}}" alt="Dish Image" class="dish-image">
+   <script>
+    document.getElementById("dishForm").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent default form submission
 
-						<!-- Delete Form -->
-						<form th:action="@{/admin/deleteDish}" method="post"
-							style="display: inline;">
-							<input type="hidden" name="name" th:value="${dish.name}">
-							<button type="submit" class="delete-btn">Delete</button>
-						</form>
+        const formData = new FormData(this);
 
-						<!-- Future Edit Functionality -->
-						<button type="button" class="edit-btn" disabled>Edit</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        try {
+            const response = await fetch("http://localhost:8083/admin/adminhome", {
+                method: "POST",
+                body: formData,
+            });
 
-	<th:block th:replace="adminfragments/footer :: footer"></th:block>
+            // Log the response status and headers
+            console.log("Response status:", response.status);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const result = await response.text(); // If server sends plain text
+            console.log("Server response:", result);
+
+            const responseMessage = document.getElementById("responseMessage");
+            if (result.trim() === "success") {
+                responseMessage.textContent = "Dish added successfully!";
+                responseMessage.style.display = "block";
+                setTimeout(() => location.reload(), 2000); // Reload after success
+            } else {
+                responseMessage.textContent = "Failed to add dish. Please try again.";
+                responseMessage.style.display = "block";
+            }
+        } catch (error) {
+            console.error("Fetch error:", error);
+            alert("An error occurred while adding the dish. Please try again.");
+        }
+    });
+</script>
+
+
 </body>
 </html>
