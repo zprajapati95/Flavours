@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{/CSS/admin.css}">
 </head>
 <body>
-    <th:block th:insert="adminfragments/header :: header"></th:block>
+  <th:block th:insert="adminfragments/header :: header"></th:block>
 
     <!-- Welcome Message -->
     <div class="welcome-header">
@@ -17,23 +17,23 @@
 
     <!-- Dish Form -->
     <div class="form-container">
-        <form id="dishForm" method="post" enctype="multipart/form-data" th:action="@{/Admin/adminhome}" th:object="${dish}">
+        <form id="dishForm" method="post" enctype="multipart/form-data" action="addDish1" th:object="${dish}">
             <div class="dish-row">
                 <div class="input-group">
-                    <label for="dishName">Dish Name:</label>
-                    <input type="text" id="dishName" name="name" th:field="*{name}" required>
+                    <label for="name">Dish Name:</label>
+                    <input type="text" id="name" name="name" th:field="*{name}" required>
                 </div>
                 <div class="input-group">
                     <label for="category">Category:</label>
                     <input type="text" id="category" name="category" th:field="*{category}" required>
                 </div>
                 <div class="input-group">
-                    <label for="image">Dish Image:</label>
-                    <input type="file" id="image" name="image" accept="image/*" th:field="*{imagePath}" required>
+                    <label for="imagePath">Dish Image:</label>
+                    <input type="file" id="imagePath" name="imagePath" accept="images/*" th:field="*{imagePath}" required>
                 </div>
                 <div class="input-group">
                     <label for="price">Price:</label>
-                    <input type="number" id="price" name="price" step="0.01" th:field="*{price}" required>
+                    <input type="number" id="price" name="price" step="5" th:field="*{price}" required>
                 </div>
                 <div class="input-group">
                     <label for="description">Description:</label>
@@ -66,7 +66,7 @@
         </div>
     </div>
 
-   <script>
+   <!-- <script>
     document.getElementById("dishForm").addEventListener("submit", async function (event) {
         event.preventDefault(); // Prevent default form submission
 
@@ -75,7 +75,7 @@
         try {
             const response = await fetch("http://localhost:8083/admin/adminhome", {
                 method: "POST",
-                body: formData,
+                body: formData
             });
 
             // Log the response status and headers
@@ -102,7 +102,49 @@
             alert("An error occurred while adding the dish. Please try again.");
         }
     });
+</script>   before code -->
+
+
+<script>
+debugger
+document.getElementById("dishForm").addEventListener("submit", async function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const formData = new FormData(event.target);
+
+    try {
+        const response = await fetch("/addDish1",{
+            method: "POST",
+            body: formData,
+        });
+
+        console.log("Response status:", response.status);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const result = await response.text();
+        console.log("Result from server:", result);
+
+        const responseMessage = document.getElementById("responseMessage");
+        if (result.trim() === "success") {
+            responseMessage.textContent = "Dish added successfully!";
+            responseMessage.style.display = "block";
+            setTimeout(() => location.reload(), 2000);
+        } else {
+            responseMessage.textContent = "Failed to add dish. Please try again.";
+            responseMessage.style.display = "block";
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while adding the dish: " + error.message);
+    }
+});
+
+
 </script>
+
 
 
 </body>

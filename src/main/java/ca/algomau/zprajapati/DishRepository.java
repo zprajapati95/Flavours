@@ -33,14 +33,16 @@ public class DishRepository {
         		parameters.addValue("category", dish.getCategory());
                
         jdbc.update(query, parameters);
-          
+        System.out.println("Dish added to database: " + dish);  // Ensure this prints when a dish is added
     }
     // Get all dishes
     public List<Dish> getDishes() {
-    	
+    	MapSqlParameterSource parameters = new MapSqlParameterSource(); 
         String query = "SELECT * FROM dish";
- 
-        return jdbc.query(query, new BeanPropertyRowMapper<>(Dish.class));
+        ArrayList<Dish> Dish =
+        		(ArrayList<Dish>)jdbc.query(query, parameters,
+        		new BeanPropertyRowMapper<Dish>(Dish.class));
+        return Dish;
     }
 
     // Get a specific dish by ID

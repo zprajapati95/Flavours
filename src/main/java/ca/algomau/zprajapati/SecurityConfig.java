@@ -19,6 +19,7 @@ public class SecurityConfig {
                     .requestMatchers("/CSS/**", "/images/**").permitAll()  // Allow static resources (CSS, images)
                     .anyRequest().permitAll()  // Allow other pages without login
             )
+            
             .formLogin(form ->
                 form
                     .loginPage("/admin/login")  // Custom login page for admins
