@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
 
 @Entity
 public class Dish {
@@ -16,7 +15,6 @@ public class Dish {
     private String category;
     private String description;
     private Double price;
-    private String imagePath;// The image path will be stored here
 
     // Getters and setters
 
@@ -60,18 +58,9 @@ public class Dish {
         this.price = price;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    @Override
+    public String toString() {
+        return "Dish [id=" + id + ", name=" + name + ", category=" + category + ", description=" + description
+                + ", price=" + price + "]";
     }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-	@Override
-	public String toString() {
-		return "Dish [id=" + id + ", name=" + name + ", category=" + category + ", description=" + description
-				+ ", price=" + price + ", imagePath=" + imagePath + "]";
-	}
-    
 }

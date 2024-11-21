@@ -1,0 +1,54 @@
+<html>
+<head>
+<link rel="stylesheet" th:href="@{/CSS/style.css}">
+<link rel="stylesheet" th:href="@{/CSS/admin.css}">
+</head>
+<body>
+	<th:block th:insert="adminfragments/header :: header"></th:block>
+
+	<div class="form-container">
+		<form id="dishForm" th:action="@{/updateDish}" th:object="${dish}"
+			method="post">
+			<div class="dish-row">
+				<input type="hidden" th:field="*{id}" />
+
+				<div class="input-group">
+					<label for="name">Dish Name</label> <input type="text"
+						th:field="*{name}" id="name" />
+				</div>
+				<div class="input-group">
+					<label for="description">Description</label>
+					<textarea th:field="*{description}" id="description"></textarea>
+				</div>
+				<div class="input-group">
+					<label for="price">Price</label> <input type="number"
+						th:field="*{price}" id="price" />
+				</div>
+				<div class="input-group">
+					<label for="category">Category:</label> <select id="category"
+						name="category" th:field="*{category}" required>
+						<option value="Breakfast"
+							th:selected="${dish.category == 'Breakfast'}">Breakfast
+							Menu</option>
+						<option value="Lunch Menu"
+							th:selected="${dish.category == 'Lunch Menu'}">Lunch
+							Menu</option>
+						<option value="Dinner Menu"
+							th:selected="${dish.category == 'Dinner Menu'}">Dinner
+							Menu</option>
+						<option value="Wine List"
+							th:selected="${dish.category == 'Wine List'}">Wine List</option>
+						<option value="Beverages List"
+							th:selected="${dish.category == 'Beverages List'}">Beverages
+							List</option>
+					</select>
+				</div>
+				<div class="button-group">
+					<button class="edit-btn" type="submit">Save Changes</button>
+				</div>
+		</form>
+	</div>
+
+
+</body>
+</html>

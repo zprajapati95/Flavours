@@ -14,6 +14,8 @@ public class CustomerController {
 
     @Autowired
     private DishRepository dishRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     // Default route to home page
     @GetMapping("/")
@@ -21,13 +23,19 @@ public class CustomerController {
         return "customer/home"; // Adjust as needed to match your template (home.html)
     }
 
-    // Menu Page
     @GetMapping("/menu")
-    public String showMenuPage(Model model) {
-        List<Dish> dishes = dishRepository.getDishes(); // Fetch dishes directly from the repository
+    public String showMenuPage(@RequestParam(required = false) String category, Model model) {
+        List<Dish> dishes;
+        if (category != null && !category.isEmpty()) {
+            dishes = dishRepository.getDishesByCategory(category);
+        } else {
+            dishes = dishRepository.getDishes(); // Show all dishes if no category is selected
+        }
+        model.addAttribute("categories", List.of("BreakFast Menu", "Lunch Menu", "Dinner Menu", "Wine List","Beverages List")); // Add your categories
         model.addAttribute("dishes", dishes);
-        return "customer/menu"; // Return menu.html template
+        return "customer/menu";
     }
+
 
     // About Us Page
     @GetMapping("/about")
@@ -56,11 +64,24 @@ public class CustomerController {
             @RequestParam("phone") String phone,
             Model model) {
 
+        // Create a new Reservation object
+        Reservation reservation = new Reservation();
+        reservation.setReservationDate(date);
+        reservation.setReservationTime(time);
+        reservation.setNumberOfGuests(guests);
+        reservation.setPhoneNumber(phone);
+
+        // Save the reservation in the database
+        reservationRepository.saveReservation(reservation);
+
+        // Add the reservation details to the model for confirmation
         model.addAttribute("date", date);
         model.addAttribute("time", time);
         model.addAttribute("guests", guests);
         model.addAttribute("phone", phone);
+        model.addAttribute("message", "Your reservation has been confirmed!");
 
-        return "customer/reservationConfirmation"; // Redirect to confirmation page
+        return "customer/reservationConfirmation"; // Return the reservation confirmation page
     }
+ 
 }
