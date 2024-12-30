@@ -161,11 +161,7 @@ h1 {
         align-items: flex-start;
     }
 
-    .dish-image {
-        width: 60px;
-        height: 60px;
-        margin-bottom: 10px;
-    }
+ 
 
     .button-group {
         flex-direction: column;
